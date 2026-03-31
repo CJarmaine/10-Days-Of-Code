@@ -8,7 +8,7 @@ def mult_numbers(n1,n2):
     return n1*n2
 def div_numbers(n1,n2):
     return n1/n2
-
+last_ans = 0.0
 
 while True:
 
@@ -25,14 +25,39 @@ while True:
         continue
 
     n1_str, func, n2_str = parts
-
-    try:
-        n1 = float(n1_str)
-        n2 = float(n2_str)
-    except ValueError:
-        print("Invalid Input")
-        continue        
-    ## n1 = float(input_str[0])
+    func = func.lower()
+    n1_str = n1_str.lower()
+    n2_str = n2_str.lower()
+    if n1_str == "ans" and n2_str == "ans":
+        try:
+            n1 = last_ans
+            n2 = last_ans
+        except ValueError:
+            print("Invalid Input")
+            continue        
+    elif n1_str == "ans":
+        try:
+            n1 = last_ans
+            n2 = float(n2_str)
+        except ValueError:
+            print("Invalid Input")
+            continue        
+    elif n2_str == "ans":
+        try:
+            n1 = float(n1_str)
+            n2 = last_ans
+        except ValueError:
+            print("Invalid Input")
+            continue        
+        
+    else:
+        try:
+            n1 = float(n1_str)
+            n2 = float(n2_str)
+        except ValueError:
+            print("Invalid Input")
+            continue        
+        ## n1 = float(input_str[0])
     ## func = input_str[1]
     ## n2 = float(input_str[2])
  
@@ -40,7 +65,7 @@ while True:
         ans = add_numbers(n1,n2)
     elif func in ['-', 'minus']:
         ans = sub_numbers(n1,n2)
-    elif func in ['*', 'multiply']:
+    elif func in ['*', 'x','multiply']:
         ans = mult_numbers(n1,n2)
     elif func in ['/', 'divide']:
         if n2 == 0:
@@ -50,6 +75,8 @@ while True:
     else:
         print("Error")
         continue
+
+    last_ans = ans
 
     if ans.is_integer():
         print(int(ans))
