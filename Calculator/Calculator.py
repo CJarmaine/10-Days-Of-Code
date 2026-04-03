@@ -26,7 +26,7 @@ def parse_input(input_str, last_ans):
         n1 = float(n1_str)
 
     if n2_str == "ans":
-        n2 - last_ans
+        n2 = last_ans
     else:
         n2 = float(n2_str)
     
@@ -48,6 +48,11 @@ def calculate(n1, func, n2):
         return pow_numbers(n1,n2)
     else:
         raise ValueError("Unknown operator")
+
+def normalize_input(input_str):
+    for op in ["+", "-", "*", "/", "^"]:
+        input_str = input_str.replace(op, f" {op} ")
+    return " ".join(input_str.split())
 
 def main():
     last_ans = 0.0
@@ -81,6 +86,9 @@ def main():
                 for i, item in enumerate(history, start=1):
                     print(f"{i}: {item}")
             continue
+        
+        raw_input = input_str
+        input_str = normalize_input(input_str)
 
         try:
             n1, func, n2 = parse_input(input_str, last_ans)
@@ -90,7 +98,7 @@ def main():
             continue
         except ValueError as e:
             print(e)
-            print("Please use format, number operator numbber (e.g. 1 + 3)")
+            print("Please use format, number operator number (e.g. 1 + 3)")
             continue
 
         last_ans = ans
@@ -100,6 +108,6 @@ def main():
         else:
             print(ans)
 
-        history.append(f"{n1} {func} {n2} = {ans}")
+        history.append(f"{raw_input} = {ans}")
 if __name__ == "__main__":
     main()
