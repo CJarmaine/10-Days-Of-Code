@@ -7,7 +7,7 @@ LOG_FILE = BASE_DIR / "test.txt"
 def log_test():
     circuit_id = input("Circuit ID: ")
     voltage = input("Voltage (V): ")
-    continuity = input("Continuity/Resistance (Ω)")
+    continuity = input("Continuity/Resistance (Ω) ")
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     entry = f"[{timestamp}] Circuit: {circuit_id} | Voltage: {voltage}V | Resistance: {continuity} Ω \n"
@@ -25,4 +25,8 @@ choice = input("Log new test (L) or Read log (R)? ").strip().upper()
 if choice == "L":
     log_test()
 elif choice == "R":
-    read_tests()
+    try:
+        read_tests()
+    except:
+        print("No previous logs\nPlease log first")
+        log_test()
