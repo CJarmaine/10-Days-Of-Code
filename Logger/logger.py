@@ -27,6 +27,6 @@ if choice == "L":
 elif choice == "R":
     try:
         read_tests()
-    except:
+    except FileNotFoundError:
         print("No previous logs\nPlease log first")
         log_test()
