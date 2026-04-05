@@ -21,4 +21,8 @@ def read_tests():
     with open(LOG_FILE, "r", encoding="utf-8") as f:
         print(f.read())    
 
-read_tests()
+choice = input("Log new test (L) or Read log (R)? ").strip().upper()
+if choice == "L":
+    log_test()
+elif choice == "R":
+    read_tests()
