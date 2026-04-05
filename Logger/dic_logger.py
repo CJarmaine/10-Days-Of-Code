@@ -15,7 +15,7 @@ def parse_log_line(line: str) -> dict:
 
     for part in parts:
         if part.startswith("Circuit:"):
-            data["circuit_is"] = part.split(":", 1)[1].strip()
+            data["circuit_id"] = part.split(":", 1)[1].strip()
         elif part.startswith("Voltage:"):
             val_str = part.split(":", 1)[1].strip().rstrip("V").strip()
             data["voltage"] = float(val_str)
@@ -23,6 +23,21 @@ def parse_log_line(line: str) -> dict:
             val_str = part.split(":", 1)[1].strip().rstrip("Ω").strip()
             data["resistance"] = float(val_str)
     return data
+
+
+def collect_test_input() -> dict:
+    circuit_id = input("Enter circuit ID: ")
+    voltage_str = input("Enter Voltage (V): ")
+    resistance_str = input("Enter resistance (Ω): ")
+
+    test = {
+        "circuit_id": circuit_id,
+        "voltage": float(voltage_str),
+        "resistance": float(resistance_str),
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
+    }
+    
+    return test
 
 def read_tests() -> list[dict]:
     tests = []
@@ -37,3 +52,8 @@ def read_tests() -> list[dict]:
 results = read_tests()
 for test in results:
     print(test)
+
+if __name__ == "__main__":
+    test = collect_test_input()
+    for key, value in test.items():
+        print(f"{key}: {value}")
