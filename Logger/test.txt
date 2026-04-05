@@ -1,1 +1,2 @@
-[2026-04-05 14:29] Circuit: 001 | Voltage: 12V | Resistance: 1.5Ω
+[2026-04-05 14:34] Circuit: 001 | Voltage: 12V | Resistance: 1.5Ω 
+[2026-04-05 14:34] Circuit: 002 | Voltage: 24V | Resistance: 2Ω 
